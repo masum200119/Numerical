@@ -1,37 +1,64 @@
-#include<stdio.h>
-#include<math.h>
-#include<stdlib.h>
+#include <bits/stdc++.h>
+using namespace std;
+
+float u_cal(float u, int n)
+{
+    float temp = u;
+    for (int i = 1; i < n; i++)
+        temp = temp * (u - i);
+    return temp;
+}
+int fact(int n)
+{
+    int f = 1;
+    for (int i = 2; i <= n; i++)
+        f *= i;
+    return f;
+}
 int main()
 {
-    float x[20], y[20], f, s, h, d, p;
-    int i, j, n;
-    printf("How many records you want to insert: ");
-    scanf("%d", &n);
-    printf("Enter the elements of x: ");
-    for(i=1; i<=n; i++)
+
+    float n = 4;
+    float x[] = { 45, 50, 55, 60 };
+    float y[4][4];
+    y[0][0] = 50;
+    y[1][0] = 70;
+    y[2][0] = 85;
+    y[3][0] = 100;
+
+    for (int i = 1; i < n; i++)
     {
-        scanf("%f", &x[i]);
-    }
-    printf("Enter the elements of y: ");
-    for(i=1; i<=n; i++)
-    {
-        scanf("%f", &y[i]);
-    }
-    h =x[2]- x[1];
-    printf("Enter the value of x for calculation: ");
-    scanf("%f", &f);
-    s = (f-x[1])/h;
-    p =1;
-    d =y[1];
-    for(i=1; i<=n-1; i++)
-    {
-        for(j=1; j<=n-i; j++)
+        for (int j = 0; j < n - i; j++)
         {
-            y[j] = y[j+1]-y[j];
+            y[j][i] = y[j + 1][i - 1] - y[j][i - 1];
+            cout<<j<<i<< " "<<j+1<<i-1<<" "<<j<<i-1<<endl;;
         }
-        p =p*(s-i+1)/i;
-        d =d+p*y[1];
+        cout<<endl;
     }
-    printf("For the value of x = %f, the value is: %f\n", f, d);
+    for (int i = 0; i < n; i++)
+    {
+        cout << setw(4) << x[i]
+             << "\t";
+        for (int j = 0; j < n - i; j++)
+            cout << setw(4) << y[i][j] << "\t";
+
+        cout << endl;
+    }
+
+
+    float value = 52;
+
+
+    float sum = y[0][0];
+    float u = (value - x[0]) / (x[1] - x[0]);
+    for (int i = 1; i < n; i++)
+    {
+
+
+        sum = sum + (u_cal(u, i) * y[0][i]) / fact(i);
+    }
+
+    cout << "\n Value at " << value << " is "
+         << sum << endl;
     return 0;
 }
