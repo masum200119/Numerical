@@ -1,0 +1,27 @@
+ #include <stdio.h>
+ #include <math.h>
+ double f(double x) {
+ return 1/(1+x*x); // Example: x^2
+ }
+ double trapezoidal_rule(double a, double b, int n) {
+ double h = (b- a) / n;
+ double sum = 0.5 * (f(a) + f(b));
+ for (int i = 1; i < n; i++) {
+ double x = a + i * h;
+ sum += f(x);
+ }
+ return h * sum;
+ }
+ int main() {
+ double a, b;
+ int n;
+ printf("Enter the lower limit of integration: ");
+ scanf("%lf", &a);
+ printf("Enter the higher limit of integration: ");
+ scanf("%lf", &b);
+ printf("Enter the number of subintervals: ");
+ scanf("%d", &n);
+ double result = trapezoidal_rule(a, b, n);
+ printf("Approximate integral: %lf\n", result);
+ return 0;
+ }
