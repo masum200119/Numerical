@@ -1,0 +1,31 @@
+ #include <stdio.h>
+ void linear_regression(double x[], double y[], int n, double *slope, double
+ *y_intercept) {
+ double sum_x = 0.0, sum_y = 0.0, sum_xy = 0.0, sum_x_squared = 0.0;
+ for (int i = 0; i < n; i++) {
+ sum_x += x[i];
+ sum_y += y[i];
+ sum_xy += x[i] * y[i];
+ sum_x_squared += x[i] * x[i];
+ }
+ *slope = (n * sum_xy- sum_x * sum_y) / (n * sum_x_squared- sum_x *
+ sum_x);
+ *y_intercept = (sum_y- *slope * sum_x) / n;
+ }
+ int main() {
+ int N, i;
+ printf("Enter the number of data points: ");
+ scanf("%d", &N);
+ double slope, y_intercept, x[N], y[N];
+ printf("Enter the value of x: ");
+ for(i = 0; i < N; i++){
+ scanf("%lf", &x[i]);
+ }
+ printf("Enter the value of y: ");
+ for(i = 0; i < N; i++){
+ scanf("%lf", &y[i]);
+ }
+ linear_regression(x, y, N, &slope, &y_intercept);
+ printf("Linear regression equation: y = %.2fx + %.2f\n", slope, y_intercept);
+ return 0;
+ 
