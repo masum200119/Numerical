@@ -1,0 +1,30 @@
+#include <stdio.h>
+ #include <math.h>
+ double f(double x) {
+ return x * x; // Example: x^2
+ }
+ double simpsons_rule(double a, double b, int n) {
+ double h = (b- a) / n;
+ double sum = f(a) + f(b);
+ for (int i = 1; i < n; i++) {
+ double x = a + i * h;
+ if (i % 2 == 0) {
+ sum += 2* f(x);
+ } else {
+ sum += 4* f(x);
+ }
+ }
+ return (h / 3) * sum;
+ }
+ int main() {
+ double a = 0.0;
+ double b = 1.0;
+ int n = 4;
+ if (n % 2 != 0) {
+ printf("Number of subintervals must be even.\n");
+ return 1;
+ }
+ double result = simpsons_rule(a, b, n);
+ printf("Approximate integral: %lf\n", result);
+ return 0;
+ }
