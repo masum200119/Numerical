@@ -1,0 +1,32 @@
+#include<stdio.h>
+ #include<math.h>
+ #include<stdlib.h>
+ int main(){
+ float x[20], y[20], f, s, h, d, p;
+ int i, j, k, n;
+ printf("How many records you want to insert: ");
+ scanf("%d", &n);
+ printf("Enter the elements of x: ");
+ for(i=1; i<=n; i++){
+ scanf("%f", &x[i]);
+ }
+ printf("Enter the elements of y: ");
+ for(i=1; i<=n; i++){
+ scanf("%f", &y[i]);
+ }
+ h =x[2]- x[1];
+ printf("Enter the value of x for calculation: ");
+ scanf("%f", &f);
+ s = (f-x[n])/h;
+ p =1;
+ d =y[n];
+ for(i=n, k=1; i>=1 && k<n; k++, i--){
+ for(j=n; j>=1; j--){
+ y[j] = y[j]- y[j-1];
+ }
+ p =p*(s+k-1)/k;
+ d =d+p*y[n];
+ }
+ printf("For the value of x = %f, the value is: %f\n", f, d);
+ return 0;
+ }
